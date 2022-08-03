@@ -5,7 +5,7 @@
 ---
 <div align = "center">
 
-<img src = "https://avatars.githubusercontent.com/u/39846203?v=4" width="100" height="100"></img>
+<img src = "https://github.com/arirismansyah/sandbox-sumsel/raw/master/assets/profile.png" width="100" height="100"></img>
 ### **Ari Rismansyah | @arirismansyah**
 
 
