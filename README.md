@@ -27,7 +27,7 @@
 
 Berikut ini merupakan scipt sandbox untuk explorasi dan identifikasi anomali data hasil pendataan LF SP2020 pada wilayah PAPI Provinsi Sumatera Selatan berdasarkan beberapa case yang disusun oleh subjectmatter & tim LF SP2020 BPS Provinsi Sumatera Selatan. Daftar Case dapat dilihat pada link berikut: <a href="http://s.bps.go.id/case_sandboxLF_sumsel">Case Sandbox</a> 
 <br>
-Script SQL berada di dalam folder QUERY 1600, file script sql diberi nama sesuai daftar case. Script sql dapat digunakan pada aplikasi Validasi Inhouse LF SP2020 untuk mengidentifikasi anomali pada data, untuk kemudian diperbaiki.
+Terdapat 23 script SQL di dalam folder QUERY 1600, file script sql diberi nama sesuai daftar case. Script sql dapat digunakan pada aplikasi Validasi Inhouse LF SP2020 untuk mengidentifikasi anomali pada data, untuk kemudian diperbaiki.
 
 
 </div>
