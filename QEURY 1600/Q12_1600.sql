@@ -1,0 +1,131 @@
+SELECT * FROM(
+SELECT distinct  
+/**tidak boleh dihapus **/
+	a.[kode_prov]
+	,a.[kode_kab]
+	,a.[kode_kec]
+	,a.[kode_desa]
+	,a.[nbs]
+	,a.no_rt as no_rt
+	, a.status_dok
+	,b.b3k6 nama
+	,r114
+	,case when a.path_image is not null then '1' else '0' end as scan
+	/**tidak boleh dihapus **/
+	,'Suku anak 10 tahun ke bawah berbeda dengan KRT dan pasangan KRT' /**ket dapat diganti **/
+	as stringcase /**tidak boleh dihapus **/
+  FROM [SP2020C2_Validasi].[dbo].[C2_t_rt] a WITH (NOLOCK)
+  left join [SP2020C2_Validasi].[dbo].m_dsrt b   WITH (NOLOCK) 
+  on 
+	a.[kode_prov] = b.kode_prov and 
+	a.[kode_kab]	= b.kode_kab and
+	a.[kode_kec]	=  b.kode_kec and
+	a.[kode_desa]	=  b.kode_desa and 
+	a.[nbs]		=  b.nbs and
+	a.no_rt		=  b.no_dsrt
+	/** contoh join dengan art **/ 
+	inner join (
+	
+	/** QUERY 1600 here  **/
+	
+	SELECT * FROM(
+		SELECT distinct
+			anak.[kode_prov],
+			anak.[kode_kab],
+			anak.[kode_kec],
+			anak.[kode_desa],
+			anak.[nbs],
+			anak.[no_rt],
+			anak.[no],
+			anak.nama,
+			anak.umur,
+			anak.kode_suku,
+			anak.nama_suku,
+			krt.nama_krt,
+			krt.umur_krt,
+			krt.kode_suku_krt,
+			krt.nama_suku_krt,
+			pasangan_krt.nama_p_krt,
+			pasangan_krt.umur_p_krt,
+			pasangan_krt.kode_suku_p_krt,
+			pasangan_krt.nama_suku_p_krt
+			
+		FROM (
+			SELECT 
+			[kode_prov],
+			[kode_kab],
+			[kode_kec],
+			[kode_desa],
+			[nbs],
+			[no_rt],
+			[no],
+			[r401] as nama,
+			[r306] as umur,
+			[r404_kode] as kode_suku,
+			[r404_desk] as nama_suku
+			
+			FROM [SP2020C2_Validasi].[dbo].[C2_t_art]
+			WHERE ([r306]<10) and ([r303] = 4)
+		) anak
+
+		inner join(
+			SELECT 
+			[kode_prov],
+			[kode_kab],
+			[kode_kec],
+			[kode_desa],
+			[nbs],
+			[no_rt],
+			[no],
+			[r401] as nama_krt,
+			[r306] as umur_krt,
+			[r404_kode] as kode_suku_krt,
+			[r404_desk] as nama_suku_krt
+			
+			FROM [SP2020C2_Validasi].[dbo].[C2_t_art]
+			WHERE [r303]=1
+		) krt on 
+			anak.[kode_prov] = krt.[kode_prov] and
+			anak.[kode_kab] = krt.[kode_kab] and
+			anak.[kode_kec] = krt.[kode_kec] and
+			anak.[nbs] = krt.[nbs] and
+			anak.[no_rt] = krt.[no_rt]
+			
+		inner join (
+			SELECT 
+			[kode_prov],
+			[kode_kab],
+			[kode_kec],
+			[kode_desa],
+			[nbs],
+			[no_rt],
+			[no],
+			[r401] as nama_p_krt,
+			[r306] as umur_p_krt,
+			[r404_kode] as kode_suku_p_krt,
+			[r404_desk] as nama_suku_p_krt
+			
+			FROM [SP2020C2_Validasi].[dbo].[C2_t_art]
+			WHERE [r303]=2 or [r303]=3
+		) pasangan_krt on
+			pasangan_krt.[kode_prov] = anak.[kode_prov] and
+			pasangan_krt.[kode_kab] = anak.[kode_kab] and
+			pasangan_krt.[kode_kec] = anak.[kode_kec] and
+			pasangan_krt.[nbs] = anak.[nbs] and
+			pasangan_krt.[no_rt] = anak.[no_rt]
+			
+			WHERE ((anak.kode_suku != krt.kode_suku_krt) and (anak.kode_suku!=pasangan_krt.kode_suku_p_krt))
+		) query
+	
+	/** QUERY 1600 here **/
+	
+) art on 
+	a.[kode_prov] = art.kode_prov and 
+	a.[kode_kab]	= art.kode_kab and
+	a.[kode_kec]	=  art.kode_kec and
+	a.[kode_desa]	=  art.kode_desa and 
+	a.[nbs]		=  art.nbs and
+	a.no_rt		=  art.no_rt
+	
+) result
+
