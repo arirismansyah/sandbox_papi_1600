@@ -65,7 +65,7 @@ SELECT distinct
 			[r404_desk] as nama_suku
 			
 			FROM [SP2020C2_Validasi].[dbo].[C2_t_art]
-			WHERE ([r306]<10) and ([r303] = 4) 
+			WHERE ([r306]<10) and ([r303] = 4) and ([kode_kab]='12')
 		) anak
 
 		inner join(
@@ -83,7 +83,7 @@ SELECT distinct
 			[r404_desk] as nama_suku_krt
 			
 			FROM [SP2020C2_Validasi].[dbo].[C2_t_art]
-			WHERE [r303]=1 
+			WHERE [r303]=1 and ([kode_kab]='12')
 		) krt on 
 			anak.[kode_prov] = krt.[kode_prov] and
 			anak.[kode_kab] = krt.[kode_kab] and
@@ -107,7 +107,7 @@ SELECT distinct
 			[r404_desk] as nama_suku_p_krt
 			
 			FROM [SP2020C2_Validasi].[dbo].[C2_t_art]
-			WHERE ([r303]=2 or [r303]=3)
+			WHERE ([r303]=2 or [r303]=3)and ([kode_kab]='12')
 		) pasangan_krt on
 			pasangan_krt.[kode_prov] = krt.[kode_prov] and
 			pasangan_krt.[kode_kab] = krt.[kode_kab] and
@@ -118,7 +118,6 @@ SELECT distinct
 			
 			WHERE ((anak.kode_suku != krt.kode_suku_krt) and (anak.kode_suku!=pasangan_krt.kode_suku_p_krt))
 		) query
-	
 	/** QUERY 1600 here **/
 	
 ) art on 

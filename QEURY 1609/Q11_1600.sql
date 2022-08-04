@@ -65,7 +65,7 @@ FROM (
 	[r405_lain] as agama_lainnya
 	
 	FROM [SP2020C2_Validasi].[dbo].[C2_t_art]
-	WHERE ([r306]<10) and ([r303] = 4)
+	WHERE ([r306]<10) and ([r303] = 4) and ([kode_kab]='09')
 ) anak
 
 inner join(
@@ -83,7 +83,7 @@ inner join(
 	[r405_lain] as agama_lainnya_krt
 	
 	FROM [SP2020C2_Validasi].[dbo].[C2_t_art]
-	WHERE [r303]=1
+	WHERE [r303]=1 and ([kode_kab]='09')
 ) krt on 
 	anak.[kode_prov] = krt.[kode_prov] and
 	anak.[kode_kab] = krt.[kode_kab] and
@@ -107,7 +107,7 @@ inner join (
 	[r405_lain] as agama_lainnya_p_krt
 	
 	FROM [SP2020C2_Validasi].[dbo].[C2_t_art]
-	WHERE [r303]=2 or [r303]=3
+	WHERE ([r303]=2 or [r303]=3) and ([kode_kab]='09')
 ) pasangan_krt on
 	pasangan_krt.[kode_prov] = krt.[kode_prov] and
 	pasangan_krt.[kode_kab] = krt.[kode_kab] and
@@ -116,7 +116,7 @@ inner join (
 	pasangan_krt.[nbs] = krt.[nbs] and
 	pasangan_krt.[no_rt] = krt.[no_rt]
 	
-	WHERE ((anak.agama != krt.agama_krt) and (anak.agama!=pasangan_krt.agama_p_krt))
+	WHERE ((anak.agama != krt.agama_krt) and (anak.agama!=pasangan_krt.agama_p_krt)) and (anak.[kode_kab]='09')
 
 	
 	/** QUERY 1600 here **/
