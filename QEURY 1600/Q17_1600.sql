@@ -47,6 +47,7 @@ SELECT distinct
 		[nbs],
 		[no_rt],
 		[no],
+		[r301],
 		[r401] as nama_ibu,
 		[r306] as umur_ibu
 		FROM [SP2020C2_Validasi].[dbo].[C2_t_art]
@@ -57,7 +58,9 @@ SELECT distinct
 		anak.[kode_desa] = ibu.[kode_desa] and
 		anak.[nbs] = ibu.[nbs] and
 		anak.[no_rt] = ibu.[no_rt] and
-		anak.[r308] = ibu.[no]
+		anak.[r308] = ibu.[no] and
+		anak.[r308] = ibu.[r301]
+		
 	WHERE ((anak.[r308] is not null) and anak.[r308]!=0) and ibu.umur_ibu-anak.[r306] < 10
 	
 	/** QUERY 1600 here **/
