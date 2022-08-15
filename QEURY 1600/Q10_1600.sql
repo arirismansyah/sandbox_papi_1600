@@ -33,11 +33,11 @@ SELECT distinct
 	/** kasus tamat sd atau lebih usia < 6 tahun **/
 	([r306]<6 and [r431]>2) or
 	/** kasus tamat smp atau lebih usia < 12 tahun **/
-	([r306]<12 and [r431]>3) or
+	([r306]<12 and [r431]>2) or
 	/** kasus tamat sma atau lebih usia < 15 tahun **/
-	([r306]<15 and [r431]>4) or
+	([r306]<15 and [r431]>3) or
 	/** kasus tamat diploma atau lebih usia < 17 tahun **/
-	([r306]<17 and [r431]>5)
+	([r306]<17 and [r431]>4)
 	
 	/** QUERY 1600 here **/
 	
